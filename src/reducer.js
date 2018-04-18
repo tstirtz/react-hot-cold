@@ -20,11 +20,11 @@ export const reducer = (state=initialState, action) => {
             correctAnswer: Math.round(Math.random() * 100) + 1
         });
     }else if(action.type === 'AURAL_UPDATE'){
+        console.log("Aural update reducer called");
         return Object.assign({}, state, {
             auralStatus: action.auralStatus
         });
     }else if(action.type === 'GUESS_FEEDBACK'){
-        console.log("guessFeedback reducer called");
         return Object.assign({}, state, {
             feedback: action.feedback
         });

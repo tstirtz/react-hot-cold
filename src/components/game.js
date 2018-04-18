@@ -5,38 +5,25 @@ import Header from './header';
 import GuessSection from './guess-section';
 import StatusSection from './status-section';
 import InfoSection from './info-section';
-import {submitGuess, restartGame, auralUpdate, guessFeedback} from '../actions';
+import {submitGuess, restartGameAction, auralUpdate, guessFeedback} from '../actions';
 
 export class Game extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     guesses: [],
-  //     feedback: 'Make your guess!',
-  //     auralStatus: '',
-  //     correctAnswer: Math.round(Math.random() * 100) + 1
-  //   };
-  // }
 
   restartGame() {
-    // this.setState({
-    //   guesses: [],
-    //   feedback: 'Make your guess!',
-    //   auralStatus: '',
-    //   correctAnswer: Math.floor(Math.random() * 100) + 1
-    // });
+    this.props.dispatch(restartGameAction());
   }
 
   makeGuess(guess) {
+    let feedback;
     guess = parseInt(guess, 10);
     if (isNaN(guess)) {
-      // this.setState({ feedback: 'Please enter a valid number' });
+      feedback = 'Please enter a valid number';
+      this.props.dispatch(guessFeedback(feedback));
       return;
     }
 
     const difference = Math.abs(guess - this.props.correctAnswer);
 
-    let feedback;
     if (difference >= 50) {
       feedback = 'You\'re Ice Cold...';
     } else if (difference >= 30) {
@@ -49,10 +36,6 @@ export class Game extends React.Component {
       feedback = 'You got it!';
     }
 
-    // this.setState({
-    //   feedback,
-    //   guesses: [...this.state.guesses, guess]
-    // });
     this.props.dispatch(submitGuess(guess));
     this.props.dispatch(guessFeedback(feedback));
 
@@ -78,6 +61,7 @@ export class Game extends React.Component {
 
 
     // this.setState({ auralStatus });
+    this.props.dispatch(auralUpdate(auralStatus));
   }
 
   render() {
