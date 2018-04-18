@@ -1,16 +1,22 @@
-export const MAKE_GUESS = 'MAKE_GUESS';
-export const makeGuess = (guess, guessIndex) => {
-    type: MAKE_GUESS,
+export const SUBMIT_GUESS = 'SUBMIT_GUESS';
+export const submitGuess = (guess) => ({
+    type: SUBMIT_GUESS,
     guess,
-    guessIndex
-}
+});
 
 export const RESTART_GAME = 'RESTART_GAME';
-export const restartGame = () => {
+export const restartGame = () => ({
     type: RESTART_GAME
-}
+});
 
 export const AURAL_UPDATE = 'AURAL_UPDATE';
-export const auralUpdate = () => {
-    type: AURAL_UPDATE
-}
+export const auralUpdate = (auralStatus) => ({
+    type: AURAL_UPDATE,
+    auralStatus
+});
+
+export const GUESS_FEEDBACK = 'GUESS_FEEDBACK';
+export const guessFeedback = (feedback) => ({
+    type: GUESS_FEEDBACK,
+    feedback
+});
