@@ -5,14 +5,14 @@ export const submitGuess = (guess) => ({
 });
 
 export const RESTART_GAME = 'RESTART_GAME';
-export const restartGameAction = () => ({
+export const restartGame = () => ({
     type: RESTART_GAME
 });
 
 export const AURAL_UPDATE = 'AURAL_UPDATE';
-export const auralUpdate = (auralStatus) => ({
+export const auralUpdate = () => ({
     type: AURAL_UPDATE,
-    auralStatus
+
 });
 
 export const GUESS_FEEDBACK = 'GUESS_FEEDBACK';
