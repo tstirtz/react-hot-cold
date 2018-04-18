@@ -1,4 +1,4 @@
-import * as actions from './actions';
+import * as action from './actions';
 
 const initialState = {
     guesses: [],
@@ -8,12 +8,26 @@ const initialState = {
 }
 
 export const reducer = (state=initialState, action) => {
-    if(action.type === 'MAKE_GUESS'){
-        return Object.assign();
+    if(action.type === 'SUBMIT_GUESS'){
+        return Object.assign({}, state, {
+            guesses: [...state.guesses, action.guess]
+        });
     }else if(action.type === 'RESTART_GAME'){
-        return Object.assign();
+        return Object.assign({}, state,{
+            guesses: [],
+            feedback: 'Make your guess!',
+            auralStatus: '',
+            correctAnswer: Math.round(Math.random() * 100) + 1
+        });
     }else if(action.type === 'AURAL_UPDATE'){
-        return Object.assign();
+        return Object.assign({}, state, {
+            auralStatus: action.auralStatus
+        });
+    }else if(action.type === 'GUESS_FEEDBACK'){
+        console.log("guessFeedback reducer called");
+        return Object.assign({}, state, {
+            feedback: action.feedback
+        });
     }
     return state;
 }
