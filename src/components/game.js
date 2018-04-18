@@ -5,6 +5,7 @@ import Header from './header';
 import GuessSection from './guess-section';
 import StatusSection from './status-section';
 import InfoSection from './info-section';
+import {submitGuess, restartGame, auralUpdate, guessFeedback} from '../actions';
 
 export class Game extends React.Component {
   // constructor(props) {
@@ -33,7 +34,7 @@ export class Game extends React.Component {
       return;
     }
 
-    const difference = Math.abs(guess - this.state.correctAnswer);
+    const difference = Math.abs(guess - this.props.correctAnswer);
 
     let feedback;
     if (difference >= 50) {
@@ -52,6 +53,8 @@ export class Game extends React.Component {
     //   feedback,
     //   guesses: [...this.state.guesses, guess]
     // });
+    this.props.dispatch(submitGuess(guess));
+    this.props.dispatch(guessFeedback(feedback));
 
     // We typically wouldn't touch the DOM directly like this in React
     // but this is the best way to update the title of the page,
@@ -104,10 +107,10 @@ export class Game extends React.Component {
 }
 
 const mapStateToProps = (state, props) => ({
-    guesses: [],
-    feedback: 'Make your guess!',
-    auralStatus: '',
-    correctAnswer: Math.round(Math.random() * 100) + 1
+    guesses: state.guesses,
+    feedback: state.feedback,
+    auralStatus: state.auralStatus,
+    correctAnswer: state.correctAnswer
 });
 
 export default connect(mapStateToProps)(Game);
