@@ -5,7 +5,7 @@ export const submitGuess = (guess) => ({
 });
 
 export const RESTART_GAME = 'RESTART_GAME';
-export const restartGame = () => ({
+export const restartGameAction = () => ({
     type: RESTART_GAME
 });
 
